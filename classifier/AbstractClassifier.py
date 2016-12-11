@@ -5,9 +5,10 @@ from abc import abstractmethod
 class AbstractClassifier(object):
     """Arbitrary classifier implementation with helper methods"""
     def __init__(self, typ, classes, **params):
-        self.type = type       # classifier type ex: "knn", "svm", etc
+        self.type = typ        # classifier type ex: "knn", "svm", etc
         self.params = params   # hyperparameters ex: { "lambda": 1 }
         self.classes = classes # output classes ex: [0, 1, 2]
+        self.trained = False   # record when the model has been trained
 
 
     # actually train the model and store any necessary data for the classifier
@@ -17,7 +18,7 @@ class AbstractClassifier(object):
 
     # perform any necessary normalization, store data, and train the model
     def train(self, X, Y):
-        self.X, self.Y = X, Y
+        self.X, self.Y, self.trained = X, Y, True
         return self._train(X, Y)
 
 
@@ -31,7 +32,10 @@ class AbstractClassifier(object):
 
     # perform any necessary normalization and test the model
     def classify(self, test_X):
-        return self._classify(test_X)
+        if self.trained:
+            return self._classify(test_X)
+        raise RuntimeError(
+            "Unable to perform classification; model must first be trained")
 
 
     # list of binary {-1, 1} class labels for OVA on each output class
