@@ -20,13 +20,19 @@ class AbstractClassifier(object):
         self.X, self.Y = X, Y
         return self._train(X, Y)
 
+
     # classify a set of test points; must accept an ndarray with shape (M, D)
     # where M is the number of test samples and D is the number of features; if
     # the classifier can only act on one point at a time, it must loop through
     # each sample
     @abstractmethod
-    def classify(self, test_X):
+    def _classify(self, test_X):
         pass
+
+    # perform any necessary normalization and test the model
+    def classify(self, test_X):
+        return self._classify(test_X)
+
 
     # list of binary {-1, 1} class labels for OVA on each output class
     @property
