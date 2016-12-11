@@ -15,7 +15,7 @@ def main():
 
 def get_preprocessed_data(csv_path, nrows=None):
     data = load_data(csv_path, nrows=nrows)
-    return preprocess(data.iloc[:,:-1]), data.iloc[:,-1]
+    return preprocess(data.iloc[:,:-1]), data.iloc[:,-1] # features, outputs
 
 # read CSV data file into a Pandas DataFrame
 def load_data(csv_path, nrows=None):
