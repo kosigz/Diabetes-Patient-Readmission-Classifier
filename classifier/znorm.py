@@ -1,10 +1,10 @@
 # decorator to z-normalize the input data of a functions
-# input function arguments: X, Y
-# output function arguments: X, Y, normalize
+# input function arguments: self, X, Y
+# output function arguments: self, X, Y, normalize
 def znorm_dec(fn):
-    def znorm_fn(X, Y):
-        znorm_X, normalize = znorm(X)
-        return fn(znorm_X, Y, normalize=normalize)
+    def znorm_fn(self, X, Y):
+        X, normalize = znorm(X)
+        return fn(self, X, Y, )
     return znorm_fn
 
 # perform z-score normalization on the dataset, providing the normalization
