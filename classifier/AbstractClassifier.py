@@ -10,7 +10,7 @@ class AbstractClassifier(object):
         self.classes = classes # output classes ex: [0, 1, 2]
 
 
-    # train the model
+    # actually train the model and store any necessary data for the classifier
     @abstractmethod
     def _train(X, Y):
         pass
@@ -18,7 +18,7 @@ class AbstractClassifier(object):
     # perform any necessary normalization, store data, and train the model
     def train(self, X, Y):
         self.X, self.Y = X, Y
-        return self._train(X)
+        return self._train(X, Y)
 
     # classify a set of test points; must accept an ndarray with shape (M, D)
     # where M is the number of test samples and D is the number of features; if
