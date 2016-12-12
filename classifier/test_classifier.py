@@ -9,11 +9,11 @@ X, Y = ds.data, ds.target
 train_X, test_X, train_Y, test_Y = train_test_split(X, Y, random_state=1)
 
 
-def test_classifier_accuracy(classifier, n=1000):
+def test_classifier_accuracy(classifier):
     classifier.train(train_X, train_Y)
     return classifier.accuracy(test_X, test_Y)
 
-def test_classifier(classifier, *args, **kwargs):
+def test_classifier(classifier):
     print "{classifier} achieved {accuracy:2.2f}% accuracy on generated test data".format(
         classifier=classifier,
-        accuracy=100 * test_classifier_accuracy(classifier, *args, **kwargs))
+        accuracy=100 * test_classifier_accuracy(classifier))
