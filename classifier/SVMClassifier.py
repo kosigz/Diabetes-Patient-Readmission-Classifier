@@ -14,7 +14,7 @@ class SVMClassifier(AbstractZnormClassifier):
         #     kernel (string): "linear", "poly", "rbf"*, "sigmoid"
         #     degree (int): 1, 2, 3*, ... (degree for polynomial kernel)
         super(SVMClassifier, self).__init__("SVM", C=C, **kwargs)
-        self._svm = SVC(C=self.params["C"], **kwargs)
+        self._svm = SVC(C=C, **kwargs)
 
     # train a SVM classifier on a provided dataset
     def _train(self, X, Y):

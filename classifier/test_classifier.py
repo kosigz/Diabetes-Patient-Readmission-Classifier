@@ -5,7 +5,8 @@ from sklearn.cross_validation import train_test_split
 # import some test data
 ds = datasets.load_iris()
 X, Y = ds.data, ds.target
-#X, Y = datasets.make_blobs(n_samples=1000, n_features=4, cluster_std=7, random_state=1)
+#X, Y = datasets.make_blobs(n_samples=1000, centers=[[0,0],[2,0],[0,2]],
+#                           n_features=2, cluster_std=1, random_state=1)
 train_X, test_X, train_Y, test_Y = train_test_split(X, Y, random_state=1)
 
 

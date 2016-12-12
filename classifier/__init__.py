@@ -6,3 +6,4 @@ from AbstractZnormClassifier import AbstractZnormClassifier
 from KNNClassifier import KNNClassifier
 from SVMClassifier import SVMClassifier
 from LogisticRegressionClassifier import LogisticRegressionClassifier
+from RandomForestClassifier import RandomForestClassifier

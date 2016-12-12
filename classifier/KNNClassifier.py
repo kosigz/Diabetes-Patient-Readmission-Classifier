@@ -14,7 +14,7 @@ class KNNClassifier(AbstractZnormClassifier):
         #     p (int): 1 (Manhattan distance), 2* (Euclidean distance)
         #     n_jobs (int): 1* or more (cores used to parallelize neighbor search)
         super(KNNClassifier, self).__init__("KNN", k=k, **kwargs)
-        self._knn = KNeighborsClassifier(n_neighbors=self.params["k"], **kwargs)
+        self._knn = KNeighborsClassifier(n_neighbors=k, **kwargs)
 
     # train a KNN classifier on a provided dataset
     def _train(self, X, Y):

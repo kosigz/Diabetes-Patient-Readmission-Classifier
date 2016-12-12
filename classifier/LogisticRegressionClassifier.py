@@ -6,10 +6,10 @@ from . import AbstractZnormClassifier, test_classifier
 
 
 class LogisticRegressionClassifier(AbstractZnormClassifier):
-    """Classifier which uses one-vs-one support vector machines"""
+    """Classifier which uses regularized logistic regression"""
     def __init__(self, C=1, phi=None, degree=3, **kwargs):
         # keyword arguments are passed on to scikit-learn's SVM implementation
-        # see http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC
+        # see http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
         # relevant kwargs (* indicates default):
         #     C (float): 1* (inverse of regularization strength)
         #     penalty (string): "l1" or "l2"* (norm to regularize against)
