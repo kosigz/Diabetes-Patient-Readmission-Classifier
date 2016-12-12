@@ -4,16 +4,21 @@ from abc import abstractmethod
 
 class AbstractClassifier(object):
     """Arbitrary classifier implementation with helper methods"""
-    def __init__(self, typ, classes, **params):
+    def __init__(self, typ, **params):
         self.type = typ        # classifier type ex: "knn", "svm", etc
         self.params = params   # hyperparameters ex: { "lambda": 1 }
-        self.classes = classes # output classes ex: [0, 1, 2]
         self.trained = False   # record when the model has been trained
+
+    def __str__(self):
+        return "{trained} {ctype} classifier with {params}".format(
+            trained="Trained" if self.trained else "Untrained",
+            ctype=self.type,
+            params=", ".join("{} = {}".format(*p) for p in self.params.iteritems()))
 
 
     # actually train the model and store any necessary data for the classifier
     @abstractmethod
-    def _train(X, Y):
+    def _train(self, X, Y):
         pass
 
     # perform any necessary normalization, store data, and train the model
@@ -32,11 +37,16 @@ class AbstractClassifier(object):
 
     # perform any necessary normalization and test the model
     def classify(self, test_X):
-        if self.trained:
-            return self._classify(test_X)
-        raise RuntimeError(
-            "Unable to perform classification; model must first be trained")
+        if not self.trained:
+            raise RuntimeError(
+                "Unable to perform classification; model must first be trained")
+        return self._classify(test_X)
 
+
+    # list of output classes ex: [0, 1, 2]
+    @property
+    def classes(self):
+        return self.Y.unique()
 
     # list of binary {-1, 1} class labels for OVA on each output class
     @property
@@ -66,4 +76,4 @@ class AbstractClassifier(object):
 
     # calculates the proportion of correctly classified test points (0-1)
     def accuracy(self, test_X, test_Y):
-        return self.correct(test_X, test_Y) / test_X.shape[0]
+        return self.correct(test_X, test_Y) / float(test_X.shape[0])
