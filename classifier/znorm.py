@@ -4,7 +4,7 @@
 def znorm_dec(fn):
     def znorm_fn(self, X, Y):
         X, normalize = znorm(X)
-        return fn(self, X, Y, )
+        return fn(self, X, Y, normalize)
     return znorm_fn
 
 # perform z-score normalization on the dataset, providing the normalization
