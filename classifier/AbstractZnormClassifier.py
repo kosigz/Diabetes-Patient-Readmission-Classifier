@@ -1,12 +1,12 @@
 from . import AbstractClassifier
-import znorm
+from . import znorm_dec as znorm
 
 
 
 class AbstractZnormClassifier(AbstractClassifier):
     """Arbitrary classifier implementation with automatic z-score normalization"""
     # perform any necessary normalization, store data, and train the model
-    @znorm.znorm_dec
+    @znorm
     def train(self, X, Y, normalize):
         self.normalize = normalize
         return super(AbstractZnormClassifier, self).train(X, Y)

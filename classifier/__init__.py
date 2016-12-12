@@ -1,3 +1,6 @@
+from znorm import znorm_dec
+from test_classifier import test_classifier
+
 from AbstractClassifier import AbstractClassifier
 from AbstractZnormClassifier import AbstractZnormClassifier
 from KNNClassifier import KNNClassifier
