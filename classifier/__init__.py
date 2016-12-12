@@ -1,2 +1,3 @@
 from AbstractClassifier import AbstractClassifier
-from znorm import *
+from AbstractZnormClassifier import AbstractZnormClassifier
+from KNNClassifier import KNNClassifier
