@@ -27,11 +27,11 @@ class LogisticRegressionClassifier(AbstractZnormClassifier):
 
     # train a logistic regression model on a provided dataset
     def _train(self, X, Y):
-        self._lr.fit(X, Y)
+        self._lr.fit(self.phi(X), Y)
 
     # classify a set of test points
     def _classify(self, test_X):
-        return self._lr.predict(test_X)
+        return self._lr.predict(self.phi(test_X))
 
 
 
@@ -42,8 +42,8 @@ def poly_expand(X, n):
 
 
 
-for C in (0.01, 0.1, 1, 2, 5, 10, 25):
-    for penalty in ("l1", "l2"):
-        for degree in range(1, 5):
-            test_classifier(LogisticRegressionClassifier(
-                C=C, phi="poly", penalty=penalty, degree=degree))
+#for C in (0.01, 0.1, 1, 2, 5, 10, 25):
+#    for penalty in ("l1", "l2"):
+#        for degree in range(1, 5):
+#            test_classifier(LogisticRegressionClassifier(
+#                C=C, phi="poly", penalty=penalty, degree=degree))
