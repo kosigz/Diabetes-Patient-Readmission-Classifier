@@ -1,3 +1,12 @@
+from sklearn import datasets
+from sklearn.cross_validation import train_test_split
+
+# import some test data
+#ds = datasets.load_iris()
+#X, Y = ds.data, ds.target
+X, Y = datasets.make_blobs(n_samples=1000, n_features=4, cluster_std=7, random_state=1)
+train_X, test_X, train_Y, test_Y = train_test_split(X, Y, random_state=1)
+
 def gen_clusters(*clusters):
     import numpy as np
 
@@ -11,9 +20,6 @@ def gen_clusters(*clusters):
 
 def test_classifier_accuracy(classifier, n=1000):
     m = n / 100
-
-    train_X, train_Y = gen_clusters((0, 0.5, n), (1, 0.25, n), (2, 1, n))
-    test_X, test_Y = gen_clusters((0, 0.5, m), (1, 0.25, m), (2, 1, m))
 
     classifier.train(train_X, train_Y)
     return classifier.accuracy(test_X, test_Y)

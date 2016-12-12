@@ -12,8 +12,8 @@ class KNNClassifier(AbstractZnormClassifier):
         # relevant kwargs (* indicates default):
         #     weights (string): "uniform"*, "distance"
         #     p (int): 1 (Manhattan distance), 2* (Euclidean distance)
-        #     n_jobs (int): 1* or more (used to parallelize neighbor search)
-        super(AbstractZnormClassifier, self).__init__("KNN", k=k, **kwargs)
+        #     n_jobs (int): 1* or more (cores used to parallelize neighbor search)
+        super(KNNClassifier, self).__init__("KNN", k=k, **kwargs)
         self._knn = KNeighborsClassifier(n_neighbors=self.params["k"], **kwargs)
 
     # train a KNN classifier on a provided dataset
@@ -27,4 +27,4 @@ class KNNClassifier(AbstractZnormClassifier):
 #for k in (3, 5, 10, 20):
 #    for w in ("uniform", "distance"):
 #        for p in (1, 2):
-#            test_classifier(KNNClassifier(10, weights=w, p=p, n_jobs=4))
+#            test_classifier(KNNClassifier(k, weights=w, p=p, n_jobs=4))
