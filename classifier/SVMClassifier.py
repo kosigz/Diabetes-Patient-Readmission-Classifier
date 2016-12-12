@@ -16,13 +16,15 @@ class SVMClassifier(AbstractZnormClassifier):
         super(SVMClassifier, self).__init__("SVM", C=C, **kwargs)
         self._svm = SVC(C=self.params["C"], **kwargs)
 
-    # train a KNN classifier on a provided dataset
+    # train a SVM classifier on a provided dataset
     def _train(self, X, Y):
         self._svm.fit(X, Y)
 
     # classify a set of test points
     def _classify(self, test_X):
         return self._svm.predict(test_X)
+
+
 
 #for C in (0.01, 0.1, 1, 2, 5, 10, 25):
 #    for kernel in ("linear", "poly", "rbf", "sigmoid"):
