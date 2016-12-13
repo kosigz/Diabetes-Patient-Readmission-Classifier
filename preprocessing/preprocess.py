@@ -6,6 +6,7 @@ import re
 from feature_types import feature_types as ftypes
 
 DATA_PATH = "../data/"
+DATA_PATH = "data/"
 OUTPUT_PATH = "../output/"
 DATA_FILE = "diabetic_data_initial.csv"
 
@@ -15,7 +16,7 @@ def main():
 
 def get_preprocessed_data(csv_path, nrows=None):
     data = load_data(csv_path, nrows=nrows)
-    return preprocess(data.iloc[:,:-1]), data.iloc[:,-1] # features, outputs
+    return preprocess(data.iloc[:,:-1]), preprocess_labels(data.iloc[:,-1]) # features, outputs
 
 # read CSV data file into a Pandas DataFrame
 def load_data(csv_path, nrows=None):
@@ -81,3 +82,10 @@ def preprocess(fts, unfold=True):
         categorical = pd.get_dummies(categorical, prefix_sep=" = ")
 
     return pd.concat([continuous, categorical], axis=1)
+
+def preprocess_labels(labels):
+    labels = labels.replace(['<30'], 1).replace(['NO', '>30'], 0)
+    # the instructions state that the variance of the following lines should be
+    # printed by the program as a sanity check
+    print 'total number of instances by class (0 = >30, NO; 1 = >30)\n{}'.format(labels.value_counts())
+    return labels
