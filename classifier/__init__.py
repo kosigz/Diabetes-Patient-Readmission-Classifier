@@ -8,5 +8,5 @@ from SVMClassifier import SVMClassifier
 from LogisticRegressionClassifier import LogisticRegressionClassifier
 from RandomForestClassifier import RandomForestClassifier
 from VoteClassifier import VoteClassifier
-from BalancedClassifier import BalancedClassifier, SMOTEClassifier
+from BalancedClassifier import OversampleClassifier, SMOTEClassifier
 from BaggingClassifier import BaggingClassifier

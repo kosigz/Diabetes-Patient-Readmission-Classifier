@@ -6,11 +6,11 @@ from . import AbstractClassifier, SVMClassifier, test_classifier
 
 
 
-class BalancedClassifier(AbstractClassifier):
+class OversampleClassifier(AbstractClassifier):
     """Classifier which uses minority oversampling to balance minority class"""
     def __init__(self, classifier, **kwargs):
-        super(BalancedClassifier, self).__init__(
-            "Balanced ({})".format(classifier), **kwargs)
+        super(OversampleClassifier, self).__init__(
+            "Oversampled ({})".format(classifier), **kwargs)
         self.classifier = classifier
 
     # balance the dataset, then train on it
@@ -43,10 +43,10 @@ class BalancedClassifier(AbstractClassifier):
         return self.classifier.classify(test_X)
 
 sm = SMOTEENN()
-class SMOTEClassifier(BalancedClassifier):
+class SMOTEClassifier(OversampleClassifier):
     """Classifier which uses bagging to account for class distribution skew"""
     def __init__(self, classifier, **kwargs):
-        super(BalancedClassifier, self).__init__(
+        super(OversampleClassifier, self).__init__(
             "SMOTE ({})".format(classifier), **kwargs)
         self.classifier = classifier
 
@@ -57,4 +57,4 @@ class SMOTEClassifier(BalancedClassifier):
 
 
 
-test_classifier(SMOTEClassifier(SVMClassifier(C=1)), folds=10)
+#test_classifier(SMOTEClassifier(SVMClassifier(C=1)), folds=10)
