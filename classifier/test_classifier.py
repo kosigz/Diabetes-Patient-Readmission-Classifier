@@ -44,15 +44,15 @@ def test_classifier_accuracy_with_num_records(classifier, num=None, folds=10, ca
         local_X, local_Y = categorical_X[:num], categorical_Y[:num]
     else:
         local_X, local_Y = X[:num], Y[:num]
-    skf = StratifiedKFold(n_splits=folds)
+#    skf = StratifiedKFold(n_splits=folds)
 
     print local_X.shape
     print local_Y.shape
 
-    for train_indices, test_indices in skf.split(local_X, local_Y):
-        train_X, train_Y = local_X.iloc[train_indices], local_Y.iloc[train_indices]
-        test_X, test_Y = local_X.iloc[test_indices], local_Y.iloc[test_indices]
-        accuracies.append(_test_classifier_accuracy(classifier, train_X, train_Y, test_X, test_Y))
+#    for train_indices, test_indices in skf.split(local_X, local_Y):
+#        train_X, train_Y = local_X.iloc[train_indices], local_Y.iloc[train_indices]
+#        test_X, test_Y = local_X.iloc[test_indices], local_Y.iloc[test_indices]
+#        accuracies.append(_test_classifier_accuracy(classifier, train_X, train_Y, test_X, test_Y))
 
     return np.mean(accuracies)
 
