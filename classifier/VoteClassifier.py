@@ -22,8 +22,8 @@ class VoteClassifier(AbstractClassifier):
 
 
 
-test_classifier(VoteClassifier(
-    KNNClassifier(3),
-    KNNClassifier(10),
-    SVMClassifier(),
-    RandomForestClassifier()))
+#test_classifier(VoteClassifier(
+#    KNNClassifier(3),
+#    KNNClassifier(10),
+#    SVMClassifier(),
+#    RandomForestClassifier()))

@@ -8,3 +8,4 @@ from SVMClassifier import SVMClassifier
 from LogisticRegressionClassifier import LogisticRegressionClassifier
 from RandomForestClassifier import RandomForestClassifier
 from VoteClassifier import VoteClassifier
+from BaggingClassifier import BaggingClassifier
