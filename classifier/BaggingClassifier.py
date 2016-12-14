@@ -1,11 +1,11 @@
 from scipy.stats import mode
 import numpy as np
 
-from . import AbstractZnormClassifier, SVMClassifier, test_classifier
+from . import AbstractClassifier
 
 
 
-class BaggingClassifier(AbstractZnormClassifier):
+class BaggingClassifier(AbstractClassifier):
     """Classifier which uses the K-nearest neighbor algorithm"""
     def __init__(self, bags, Classifier):
         super(BaggingClassifier, self).__init__("Bagging",
@@ -45,4 +45,4 @@ class BaggingClassifier(AbstractZnormClassifier):
 
 
 
-test_classifier(BaggingClassifier(10, SVMClassifier))
+#test_classifier(BaggingClassifier(10, SVMClassifier))

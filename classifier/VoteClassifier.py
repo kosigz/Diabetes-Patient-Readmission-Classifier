@@ -11,7 +11,7 @@ class VoteClassifier(AbstractClassifier):
         self._classifiers = classifiers
 
 
-    # train a KNN classifier on a provided dataset
+    # train all sub-classifiers on a provided dataset
     def _train(self, X, Y):
         for c in self._classifiers:
             c.train(X, Y)
