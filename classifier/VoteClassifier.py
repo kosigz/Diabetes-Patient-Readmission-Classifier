@@ -18,7 +18,7 @@ class VoteClassifier(AbstractClassifier):
 
     # classify a set of test points
     def _classify(self, test_X):
-        return mode([c.classify(test_X) for c in self._classifiers]).mode
+        return mode([c.classify(test_X) for c in self._classifiers]).mode[0]
 
 
 
