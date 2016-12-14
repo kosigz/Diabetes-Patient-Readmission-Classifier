@@ -1,12 +1,13 @@
 from scipy.stats import mode
 import numpy as np
+from imblearn.combine import SMOTEENN
 
 from . import AbstractClassifier, SVMClassifier, test_classifier
 
 
 
 class BalancedClassifier(AbstractClassifier):
-    """Classifier which uses bagging to account for class distribution skew"""
+    """Classifier which uses minority oversampling to balance minority class"""
     def __init__(self, classifier, **kwargs):
         super(BalancedClassifier, self).__init__(
             "Balanced ({})".format(classifier), **kwargs)
@@ -41,6 +42,19 @@ class BalancedClassifier(AbstractClassifier):
     def _classify(self, test_X):
         return self.classifier.classify(test_X)
 
+sm = SMOTEENN()
+class SMOTEClassifier(BalancedClassifier):
+    """Classifier which uses bagging to account for class distribution skew"""
+    def __init__(self, classifier, **kwargs):
+        super(BalancedClassifier, self).__init__(
+            "SMOTE ({})".format(classifier), **kwargs)
+        self.classifier = classifier
+
+    # balance the dataset, then train on it
+    def _train(self, X, Y):
+        # train the classifier on SMOTE-balanced samples
+        self.classifier.train(*sm.fit_sample(X, Y))
 
 
-#test_classifier(BalancedClassifier(SVMClassifier(C=1)), folds=10)
+
+test_classifier(SMOTEClassifier(SVMClassifier(C=1)), folds=10)
