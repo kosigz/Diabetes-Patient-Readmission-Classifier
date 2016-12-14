@@ -30,3 +30,4 @@ class KNNClassifier(AbstractZnormClassifier):
 #    for w in ("uniform", "distance"):
 #        for p in (1, 2):
 #            test_classifier(KNNClassifier(k, weights=w, p=p, n_jobs=4))
+#test_classifier(KNNClassifier(5, n_jobs=4))

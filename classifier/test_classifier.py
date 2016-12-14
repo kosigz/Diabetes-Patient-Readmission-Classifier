@@ -6,35 +6,36 @@ from sklearn.cross_validation import train_test_split
 
 from preprocessing.preprocess import get_preprocessed_data as get_data, balance_samples
 
-NROWS = 5000
+NROWS = 2000
 # import some test data
 ds = datasets.load_iris()
 X, Y = ds.data, ds.target
-#X, Y = get_data('diabetic_data_initial.csv', nrows=NROWS)
+
+X, Y = get_data("diabetic_data_initial.csv", nrows=NROWS)
+# delete one of the columns which causes trouble with small data sets
+if NROWS < 20000:
+    X = X.drop('payer_code', 1)
 
 # I guess we can keep this on hand to test trees or other classifiers that need categorical variables
-categorical_X, categorical_Y = get_data('diabetic_data_initial.csv', nrows=NROWS, unfold=False)
+categorical_X, categorical_Y = get_data("diabetic_data_initial.csv", nrows=NROWS, unfold=False)
 
-# delete one of the columns which causes trouble with small data sets
-#if NROWS < 20000:
-#    X = X.drop('payer_code', 1)
+#X, Y = balance_samples(X, Y)
+#X, Y = pd.DataFrame(X), pd.DataFrame(Y)
 
-X, Y = balance_samples(X, Y)
-X, Y = pd.DataFrame(X), pd.DataFrame(Y)
+def test_classifier_accuracy(classifier, folds=1):
+    acc = []
 
-print '|X| = {}, |y| = {} after resampling.'.format(len(X), len(Y))
+    for i in range(folds):
+        train_X, test_X, train_Y, test_Y = train_test_split(X, Y, random_state=1)
+        classifier.train(train_X, train_Y)
+        acc.append(classifier.accuracy(test_X, test_Y))
 
-#X, Y = datasets.make_blobs(n_samples=1000, centers=[[0,0],[2,0],[0,2]],
-#                           n_features=2, cluster_std=1, random_state=1)
-train_X, test_X, train_Y, test_Y = train_test_split(X, Y, random_state=1)
-def test_classifier_accuracy(classifier):
-    classifier.train(train_X, train_Y)
-    return classifier.accuracy(test_X, test_Y)
+    return np.mean(acc)
 
-def test_classifier(classifier):
+def test_classifier(classifier, folds=1):
     print "{classifier} achieved {accuracy:2.2f}% accuracy on generated test data".format(
         classifier=classifier,
-        accuracy=100 * test_classifier_accuracy(classifier))
+        accuracy=100 * test_classifier_accuracy(classifier, folds))
 
 def test_classifier_accuracy_with_num_records(classifier, num=None, folds=10, categorical=False):
     accuracies = []

@@ -9,7 +9,7 @@ class BalancedClassifier(AbstractClassifier):
     """Classifier which uses bagging to account for class distribution skew"""
     def __init__(self, classifier, **kwargs):
         super(BalancedClassifier, self).__init__(
-            "Balanced {}".format(classifier), **kwargs)
+            "Balanced ({})".format(classifier), **kwargs)
         self.classifier = classifier
 
     # balance the dataset, then train on it
@@ -43,4 +43,4 @@ class BalancedClassifier(AbstractClassifier):
 
 
 
-test_classifier(BalancedClassifier(SVMClassifier(C=1)))
+#test_classifier(BalancedClassifier(SVMClassifier(C=1)), folds=10)

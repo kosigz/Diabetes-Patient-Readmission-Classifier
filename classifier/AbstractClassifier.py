@@ -40,6 +40,7 @@ class AbstractClassifier(object):
         if not self.trained:
             raise RuntimeError(
                 "Unable to perform classification; model must first be trained")
+
         return self._classify(test_X)
 
 
