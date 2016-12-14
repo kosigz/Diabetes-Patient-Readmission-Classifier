@@ -23,7 +23,7 @@ class SVMClassifier(AbstractZnormClassifier):
         return self._svm.predict(test_X)
 
 '''
-for C in (0.01, 0.1, 1, 2, 5):
+for C in (0.01, 0.1, 1, 2, 5, 10, 25):
     for kernel in ("linear", "poly", "rbf", "sigmoid"):
         if kernel == "poly":
             for degree in range(2, 4):

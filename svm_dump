@@ -1,0 +1,29 @@
+total number of instances by class (0 = >30, NO; 1 = <30)
+0    4445
+1     555
+Name: readmitted, dtype: int64
+total number of instances by class (0 = >30, NO; 1 = <30)
+0    4445
+1     555
+Name: readmitted, dtype: int64
+<class 'pandas.core.frame.DataFrame'>
+(5000, 150)
+<class 'pandas.core.series.Series'>
+(5000,)
+<class 'pandas.core.frame.DataFrame'>
+(8772, 150)
+<class 'pandas.core.series.Series'>
+(8772,)
+(8772, 150)
+(8772,)
+C: 0.01
+Kernel: linear
+Accuracy: 0.655136948645
+(8772, 150)
+(8772,)
+C: 0.01
+Kernel: poly
+Degree: 2
+Accuracy: 0.511401350997
+(8772, 150)
+(8772,)

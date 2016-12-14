@@ -24,10 +24,7 @@ class KNNClassifier(AbstractZnormClassifier):
     def _classify(self, test_X):
         return self._knn.predict(test_X)
 
-
-
 #for k in (3, 5, 10, 20):
 #    for w in ("uniform", "distance"):
 #        for p in (1, 2):
 #            test_classifier(KNNClassifier(k, weights=w, p=p, n_jobs=4))
-#test_classifier(KNNClassifier(5, n_jobs=4))

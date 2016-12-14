@@ -37,7 +37,7 @@ def test_classifier(classifier, folds=1):
         classifier=classifier,
         accuracy=100 * test_classifier_accuracy(classifier, folds))
 
-def test_classifier_accuracy_with_num_records(classifier, num=None, folds=10, categorical=False):
+def test_classifier_accuracy_with_num_records(classifier, num=None, folds=10, categorical=False, features_to_use=None):
     accuracies = []
     if not num:
         num = len(X)
@@ -45,10 +45,14 @@ def test_classifier_accuracy_with_num_records(classifier, num=None, folds=10, ca
         local_X, local_Y = categorical_X[:num], categorical_Y[:num]
     else:
         local_X, local_Y = X[:num], Y[:num]
-#    skf = StratifiedKFold(n_splits=folds)
 
-    print local_X.shape
-    print local_Y.shape
+    if features_to_use:
+        local_X = local_X[features_to_use]
+        # this is going to be kind of slow but the balancing doesn't keep the data indices intact
+        local_X, local_Y = balance_samples(local_X, local_Y)
+        local_X, local_Y = pd.DataFrame(local_X), pd.Series(local_Y)
+
+    skf = StratifiedKFold(n_splits=folds)
 
 #    for train_indices, test_indices in skf.split(local_X, local_Y):
 #        train_X, train_Y = local_X.iloc[train_indices], local_Y.iloc[train_indices]
