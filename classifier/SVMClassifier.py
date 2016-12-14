@@ -2,8 +2,6 @@ from sklearn.svm import SVC
 
 from . import AbstractZnormClassifier, test_classifier
 
-
-
 class SVMClassifier(AbstractZnormClassifier):
     """Classifier which uses one-vs-one support vector machines"""
     def __init__(self, C=1, **kwargs):
@@ -24,12 +22,12 @@ class SVMClassifier(AbstractZnormClassifier):
     def _classify(self, test_X):
         return self._svm.predict(test_X)
 
-
-
-#for C in (0.01, 0.1, 1, 2, 5, 10, 25):
-#    for kernel in ("linear", "poly", "rbf", "sigmoid"):
-#        if kernel == "poly":
-#            for degree in range(2, 4):
-#                test_classifier(SVMClassifier(C, kernel=kernel, degree=degree))
-#        else:
-#            test_classifier(SVMClassifier(C, kernel=kernel))
+'''
+for C in (0.01, 0.1, 1, 2, 5):
+    for kernel in ("linear", "poly", "rbf", "sigmoid"):
+        if kernel == "poly":
+            for degree in range(2, 4):
+                test_classifier(SVMClassifier(C, kernel=kernel, degree=degree, verbose=True))
+        else:
+            test_classifier(SVMClassifier(C, kernel=kernel, verbose=True))
+'''

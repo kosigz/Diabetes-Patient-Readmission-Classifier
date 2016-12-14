@@ -11,12 +11,13 @@ OUTPUT_PATH = "../output/"
 DATA_FILE = "diabetic_data_initial.csv"
 
 def main():
-    features, labels = get_preprocessed_data(DATA_FILE, nrows=1000)
+    features, labels = get_preprocessed_data(DATA_FILE, nrows=10000)
     print features.columns
 
-def get_preprocessed_data(csv_path, nrows=None):
+def get_preprocessed_data(csv_path, nrows=None, unfold=True):
     data = load_data(csv_path, nrows=nrows)
-    return preprocess(data.iloc[:,:-1]), preprocess_labels(data.iloc[:,-1]) # features, outputs
+
+    return preprocess(data.iloc[:,:-1], unfold=unfold), preprocess_labels(data.iloc[:,-1]) # features, outputs
 
 # read CSV data file into a Pandas DataFrame
 def load_data(csv_path, nrows=None):
@@ -87,5 +88,8 @@ def preprocess_labels(labels):
     labels = labels.replace(['<30'], 1).replace(['NO', '>30'], 0)
     # the instructions state that the variance of the following lines should be
     # printed by the program as a sanity check
-    print 'total number of instances by class (0 = >30, NO; 1 = >30)\n{}'.format(labels.value_counts())
+    print 'total number of instances by class (0 = >30, NO; 1 = <30)\n{}'.format(labels.value_counts())
     return labels
+
+def rebalance_data(fts, labels):
+    return fts, labels
