@@ -2,6 +2,7 @@ from os import path
 import pandas as pd
 import numpy as np
 import re
+from imblearn.combine import SMOTEENN
 
 from feature_types import feature_types as ftypes
 
@@ -16,8 +17,8 @@ def main():
 
 def get_preprocessed_data(csv_path, nrows=None, unfold=True):
     data = load_data(csv_path, nrows=nrows)
-
-    return preprocess(data.iloc[:,:-1], unfold=unfold), preprocess_labels(data.iloc[:,-1]) # features, outputs
+    X, y = preprocess(data.iloc[:,:-1], unfold=unfold), preprocess_labels(data.iloc[:,-1])
+    return X, y
 
 # read CSV data file into a Pandas DataFrame
 def load_data(csv_path, nrows=None):
@@ -91,5 +92,27 @@ def preprocess_labels(labels):
     print 'total number of instances by class (0 = >30, NO; 1 = <30)\n{}'.format(labels.value_counts())
     return labels
 
-def rebalance_data(fts, labels):
-    return fts, labels
+def balance_samples(X, y):
+    '''
+    This turned out to be a pain. Will use library.
+    negative_class_indices = y == 0
+    positive_class_indices = y == 1
+    print negative_class_indices
+    print positive_class_indices
+    diff = negative_class_indices.sum() - positive_class_indices.sum()
+    if diff <= 0:
+        return X, y
+
+    positive_indices = []
+    # this is a hack
+    for i, b in enumerate(positive_class_indices):
+        if b:
+            positive_indices.append(i)
+
+    indices_to_sample = np.random.choice(positive_indices, size=diff)
+    Xprime, yprime = X.append(X.iloc[indices_to_sample]), y.append(y.iloc[indices_to_sample])
+    # now resample
+    return Xprime, yprime
+    '''
+    sm = SMOTEENN()
+    return sm.fit_sample(X, y)

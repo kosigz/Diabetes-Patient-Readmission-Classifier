@@ -1,16 +1,39 @@
 from preprocessing.preprocess import get_preprocessed_data as get_data
 from classifier.SVMClassifier import SVMClassifier
+from classifier.KNNClassifier import KNNClassifier
+from classifier.LogisticRegressionClassifier import LogisticRegressionClassifier
+from classifier.RandomForestClassifier import RandomForestClassifier
 from classifier.test_classifier import test_classifier_accuracy_with_num_records
 
 def test_svm():
     # hangs on the larger values, i.e. 10 and 25, so I am taking those out here
-    for C in (0.01, 0.1, 1, 2, 5):
+    for C in (0.01, 0.1, 1):
         for kernel in ("linear", "poly", "rbf", "sigmoid"):
             if kernel == "poly":
                 for degree in range(2, 4):
-                    test_classifier_accuracy_with_num_records(SVMClassifier(C, kernel=kernel, degree=degree, verbose=True), 1000)
+                    print 'C: {}\nKernel: {}\nDegree: {}\nAccuracy: {}'.format(
+                    C, kernel, degree,
+                    test_classifier_accuracy_with_num_records(SVMClassifier(C, kernel=kernel, degree=degree)))
             else:
-                test_classifier_accuracy_with_num_records(SVMClassifier(C, kernel=kernel), 1000)
+                print 'C: {}\nKernel: {}\nAccuracy: {}'.format(
+                C, kernel,
+                test_classifier_accuracy_with_num_records(SVMClassifier(C, kernel=kernel)))
 
-test_svm()
-print 'Done.'
+def test_knn():
+    for k in (1, 2, 4, 8, 16, 25, 32, 50, 64):
+        print 'KNN with [k = {}] accuracy is [{}]'.format(k, test_classifier_accuracy_with_num_records(KNNClassifier(k, n_jobs=4)))
+
+def test_log_reg():
+    for C in (0.001, 0.01, 0.1, 1):
+        for degree in range(2, 4):
+            print 'C: {}\nDegree: {}\nAccuracy: {}'.format(
+            C, degree,
+            test_classifier_accuracy_with_num_records(LogisticRegressionClassifier(C=C, degree=degree)))
+
+def test_random_forests():
+    for t in (4, 8, 16, 25, 32, 50, 64, 75, 100, 128):
+        print 'Num Trees: {}\nAccuracy: {}'.format(
+        t,
+        test_classifier_accuracy_with_num_records(RandomForestClassifier(n=t)))
+
+test_knn()
