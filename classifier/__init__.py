@@ -10,3 +10,4 @@ from RandomForestClassifier import RandomForestClassifier
 from VoteClassifier import VoteClassifier
 from BalancedClassifier import OversampleClassifier, SMOTEClassifier
 from BaggingClassifier import BaggingClassifier
+from ModeClassifier import ModeClassifier
