@@ -8,9 +8,9 @@ from . import VoteClassifier, SVMClassifier, test_classifier
 class BaggingClassifier(VoteClassifier):
     """Classifier which uses bagging to account for class distribution skew"""
     def __init__(self, bags, Classifier):
-        super(BaggingClassifier, self).__init__(Classifier=Classifier, bags=bags)
-        self.type = "Bagging"
+        super(BaggingClassifier, self).__init__()
         self._classifiers = [Classifier() for i in range(bags)]
+        self.type = "Bagged (10 x {})".format(str(self._classifiers[0]))
 
     # train all sub-classifiers on a provided dataset
     def _train(self, X, Y):
@@ -41,4 +41,4 @@ class BaggingClassifier(VoteClassifier):
 
 
 
-#test_classifier(BaggingClassifier(10, SVMClassifier))
+test_classifier(BaggingClassifier(10, SVMClassifier))

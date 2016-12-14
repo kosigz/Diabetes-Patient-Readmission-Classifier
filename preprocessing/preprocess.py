@@ -89,7 +89,7 @@ def preprocess_labels(labels):
     labels = labels.replace(['<30'], 1).replace(['NO', '>30'], 0)
     # the instructions state that the variance of the following lines should be
     # printed by the program as a sanity check
-    print 'total number of instances by class (0 = >30, NO; 1 = <30)\n{}'.format(labels.value_counts())
+#    print 'total number of instances by class (0 = >30, NO; 1 = <30)\n{}'.format(labels.value_counts())
     return labels
 
 def balance_samples(X, y):
