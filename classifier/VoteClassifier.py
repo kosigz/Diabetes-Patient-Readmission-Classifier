@@ -6,8 +6,8 @@ from . import AbstractClassifier, KNNClassifier, SVMClassifier, RandomForestClas
 
 class VoteClassifier(AbstractClassifier):
     """Ensemble classifier which uses a vote of sub-classifiers"""
-    def __init__(self, *classifiers):
-        super(VoteClassifier, self).__init__("Vote")
+    def __init__(self, *classifiers, **kwargs):
+        super(VoteClassifier, self).__init__("Vote", **kwargs)
         self._classifiers = classifiers
 
 
@@ -18,7 +18,7 @@ class VoteClassifier(AbstractClassifier):
 
     # classify a set of test points
     def _classify(self, test_X):
-        return mode(c.classify(test_X) for c in self._classifiers)
+        return mode([c.classify(test_X) for c in self._classifiers]).mode
 
 
 

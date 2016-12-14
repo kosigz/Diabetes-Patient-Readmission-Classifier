@@ -1,18 +1,18 @@
 from scipy.stats import mode
 import numpy as np
 
-from . import AbstractClassifier
+from . import VoteClassifier, SVMClassifier, test_classifier
 
 
 
-class BaggingClassifier(AbstractClassifier):
-    """Classifier which uses the K-nearest neighbor algorithm"""
+class BaggingClassifier(VoteClassifier):
+    """Classifier which uses bagging to account for class distribution skew"""
     def __init__(self, bags, Classifier):
-        super(BaggingClassifier, self).__init__("Bagging",
-            bags=bags, Classifier=Classifier)
+        super(BaggingClassifier, self).__init__(Classifier=Classifier, bags=bags)
+        self.type = "Bagging"
         self._classifiers = [Classifier() for i in range(bags)]
 
-    # train a KNN classifier on a provided dataset
+    # train all sub-classifiers on a provided dataset
     def _train(self, X, Y):
         # combine features with outputs for simpler row manipulation
         data = np.hstack((X, Y.reshape((-1, 1))))
@@ -38,10 +38,6 @@ class BaggingClassifier(AbstractClassifier):
                     train_data = np.vstack((train_data, subset[sample_idxs]))
 
             classifier.train(train_data[:,:-1], train_data[:,-1])
-
-    # classify a set of test points
-    def _classify(self, test_X):
-        return mode([c.classify(test_X) for c in self._classifiers]).mode
 
 
 
