@@ -6,11 +6,11 @@ from . import AbstractClassifier, SVMClassifier, RandomForestClassifier, Logisti
 
 
 
-class BalancedClassifier(AbstractClassifier):
+class OversampleClassifier(AbstractClassifier):
     """Classifier which uses minority oversampling to balance minority class"""
     def __init__(self, classifier, **kwargs):
-        super(BalancedClassifier, self).__init__(
-            "Balanced ({})".format(classifier), **kwargs)
+        super(OversampleClassifier, self).__init__(
+            "Oversampled ({})".format(classifier), **kwargs)
         self.classifier = classifier
 
     # balance the dataset, then train on it
@@ -43,10 +43,10 @@ class BalancedClassifier(AbstractClassifier):
         return self.classifier.classify(test_X)
 
 sm = SMOTEENN()
-class SMOTEClassifier(BalancedClassifier):
+class SMOTEClassifier(OversampleClassifier):
     """Classifier which uses bagging to account for class distribution skew"""
     def __init__(self, classifier, **kwargs):
-        super(BalancedClassifier, self).__init__(
+        super(OversampleClassifier, self).__init__(
             "SMOTE ({})".format(classifier), **kwargs)
         self.classifier = classifier
 
@@ -79,3 +79,4 @@ raise Exception('done for now')
 '''
 for t in [4, 8, 16, 25, 32, 50, 64, 75, 100, 128]:
     test_classifier(RandomForestClassifier(t))
+
