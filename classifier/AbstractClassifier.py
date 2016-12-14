@@ -10,8 +10,7 @@ class AbstractClassifier(object):
         self.trained = False   # record when the model has been trained
 
     def __str__(self):
-        return "{trained} {ctype} classifier with {params}".format(
-            trained="Trained" if self.trained else "Untrained",
+        return "{ctype} classifier with [{params}]".format(
             ctype=self.type,
             params=", ".join("{} = {}".format(*p) for p in self.params.iteritems()))
 
@@ -24,6 +23,7 @@ class AbstractClassifier(object):
     # perform any necessary normalization, store data, and train the model
     def train(self, X, Y):
         self.X, self.Y, self.trained = X, Y, True
+        print str(self)
         return self._train(X, Y)
 
 
@@ -40,6 +40,7 @@ class AbstractClassifier(object):
         if not self.trained:
             raise RuntimeError(
                 "Unable to perform classification; model must first be trained")
+
         return self._classify(test_X)
 
 

@@ -31,3 +31,4 @@ for C in (0.01, 0.1, 1, 2, 5, 10, 25):
         else:
             test_classifier(SVMClassifier(C, kernel=kernel, verbose=True))
 '''
+#test_classifier(SVMClassifier(1, kernel="rbf"))
