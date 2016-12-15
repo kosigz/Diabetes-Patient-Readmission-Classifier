@@ -77,6 +77,4 @@ def learning_curve(classifier, sizes, classifier_name=None, **kwargs):
 
 
 
-print learning_curve(KNNClassifier(3), range(100, 5001, 250))
-
-
+print learning_curve(RandomForestClassifier(3), range(100, 5001, 250))

@@ -56,7 +56,6 @@ class SMOTEClassifier(OversampleClassifier):
         self.classifier.train(*sm.fit_sample(X, Y))
 
 
-
 #from . import SVMClassifier, RandomForestClassifier, LogisticRegressionClassifier, KNNClassifier, test_classifier
 '''
 for kernel in ['rbf', 'poly']:

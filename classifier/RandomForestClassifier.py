@@ -25,7 +25,7 @@ class RandomForestClassifier(AbstractZnormClassifier):
 
 
 
-#from . import test_classifier, BaggingClassifier, OversampleClassifier
+from . import test_classifier, BaggingClassifier, SMOTEClassifier, SVMClassifier, KNNClassifier
 ##
 #for bags in (3, 5, 10):
 #    for n in (5, 10, 25):
@@ -39,3 +39,5 @@ class RandomForestClassifier(AbstractZnormClassifier):
 #    folds=10,
 #    num_samples=5000,
 #    unfold=False)
+
+test_classifier(BaggingClassifier(10, lambda: SMOTEClassifier(KNNClassifier(2))), folds=5, num_samples=2000)
