@@ -27,10 +27,10 @@ def test_classifier_accuracy(classifier, folds=10, num_samples=None, unfold=True
 
     for i in range(folds):
         train_X, test_X, train_Y, test_Y = train_test_split(
-            temp_X.values, temp_Y.values, train_size=num_samples)
+            temp_X.values, temp_Y.values, train_size=num_samples, test_size=num_samples/2)
 
         classifier.train(train_X, train_Y)
-        acc.append(classifier.accuracy(test_X, test_Y))
+        acc.append(classifier.accuracy(*balance_samples(test_X, test_Y)))
 
         print "Fold #{fold}: {accuracy:2.2f}% accuracy".format(fold=i, accuracy=acc[-1]*100)
 
