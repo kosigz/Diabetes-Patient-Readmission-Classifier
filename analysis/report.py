@@ -7,11 +7,12 @@ import matplotlib.pyplot as plt
 from os.path import join
 
 from preprocessing.preprocess import get_preprocessed_data as get_data
-from classifier.SVMClassifier import SVMClassifier
-from classifier.KNNClassifier import KNNClassifier
-from classifier.LogisticRegressionClassifier import LogisticRegressionClassifier
-from classifier.RandomForestClassifier import RandomForestClassifier
-from classifier.test_classifier import test_classifier_accuracy#, test_classifier_accuracy_with_num_records
+from classifier import *
+#from classifier.SVMClassifier import SVMClassifier
+#from classifier.KNNClassifier import KNNClassifier
+#from classifier.LogisticRegressionClassifier import LogisticRegressionClassifier
+#from classifier.RandomForestClassifier import RandomForestClassifier
+#from classifier.test_classifier import test_classifier_accuracy
 
 
 
@@ -56,9 +57,9 @@ def learning_curve(classifier, sizes, classifier_name=None, **kwargs):
     classifier_name = classifier_name or str(classifier)
     acc = []
     for size in sizes:
-        print "Size: ", size
-        acc.append(
-            100 * test_classifier_accuracy(classifier, num_samples=size, **kwargs))
+        acc.append(100 * test_classifier_accuracy(classifier, num_samples=size, folds=3, **kwargs))
+
+        print "%d samples --> %2.2f%% accuracy" % (size, acc[-1])
 
     # build plot
     plt.figure(figsize=(5 * PHI, 5))
@@ -76,5 +77,12 @@ def learning_curve(classifier, sizes, classifier_name=None, **kwargs):
     save_plot_img("{}-learning-curve.png".format(classifier))
 
 
+weaks = [
+    BaggingClassifier(5, lambda: SVMClassifier(6)),
+    BaggingClassifier(5, lambda: SVMClassifier(9, kernel="poly", degree=3)),
+    BaggingClassifier(10, lambda: RandomForestClassifier(128))]
+ensemble = VoteClassifier(*weaks)
+classifiers = weaks + [ensemble]
 
-print learning_curve(RandomForestClassifier(3), range(100, 5001, 250))
+for c in classifiers:
+    print learning_curve(c, range(1000, 5001, 500))
