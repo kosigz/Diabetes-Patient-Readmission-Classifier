@@ -63,6 +63,7 @@ def learning_curve(classifier, sizes, classifier_name=None, **kwargs):
     # build plot
     plt.figure(figsize=(5 * PHI, 5))
     plt.plot(sizes, acc, "bo")
+    plt.ylim(ymax=100)
 
     # create title and axis labels
     plt.title("Learning Curve\n{}".format(classifier_name))
