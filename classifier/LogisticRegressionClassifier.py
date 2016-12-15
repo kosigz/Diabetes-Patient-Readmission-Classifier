@@ -1,7 +1,7 @@
 from sklearn.linear_model import LogisticRegression
 import numpy as np
 
-from . import AbstractZnormClassifier, test_classifier
+from . import AbstractZnormClassifier
 
 
 
@@ -42,8 +42,9 @@ def poly_expand(X, n):
 
 
 
+#from . import test_classifier
+#
 #for C in (0.01, 0.1, 1, 2, 5, 10, 25):
 #    for penalty in ("l1", "l2"):
-#        for degree in range(1, 5):
-#            test_classifier(LogisticRegressionClassifier(
-#                C=C, phi="poly", penalty=penalty, degree=degree))
+#        test_classifier(LogisticRegressionClassifier(
+#            C=C, penalty=penalty, class_weight="balanced"))

@@ -59,8 +59,8 @@ class SMOTEClassifier(OversampleClassifier):
 
 #from . import SVMClassifier, RandomForestClassifier, LogisticRegressionClassifier, KNNClassifier, test_classifier
 '''
-for c in range(1, 10, 1):
-    for kernel in ['rbf', 'poly']:
+for kernel in ['rbf', 'poly']:
+    for c in range(1, 10, 1):
         if kernel == poly:
             test_classifier(SMOTEClassifier(SVMClassifier(C=c, kernel=kernel, degree=3)), folds=10)
         test_classifier(SMOTEClassifier(SVMClassifier(C=c, kernel=kernel, degree=3)), folds=10)
@@ -83,3 +83,4 @@ raise Exception('done for now')
 #for t in [4, 8, 16, 25, 32, 50, 64, 75, 100, 128]:
 #    test_classifier(RandomForestClassifier(t))
 
+#test_classifier(SMOTEClassifier(SVMClassifier(C=6, kernel='rbf')), folds=10)
