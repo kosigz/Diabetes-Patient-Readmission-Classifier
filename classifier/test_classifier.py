@@ -30,13 +30,13 @@ def test_classifier_accuracy(classifier, folds=10, num_samples=None):
     temp_Y = Y[:num_samples]
 
     for i in range(folds):
-        train_X, test_X, train_Y, test_Y = train_test_split(temp_X, temp_Y, random_state=1)
+        train_X, test_X, train_Y, test_Y = train_test_split(temp_X, temp_Y, random_state=42)
         classifier.train(train_X, train_Y)
         acc.append(classifier.accuracy(test_X, test_Y))
 
     return np.mean(acc)
 
-def test_classifier(classifier, folds=1, num_samples=5000):
+def test_classifier(classifier, folds=1, num_samples=2000):
     print "{classifier} achieved {accuracy:2.2f}% accuracy on generated test data".format(
         classifier=classifier,
         accuracy=100 * test_classifier_accuracy(classifier, folds, num_samples))

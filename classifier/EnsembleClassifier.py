@@ -24,4 +24,4 @@ bagged_classifiers = [BaggingClassifier(10, C) for C in classifier_fns]
 ensemble = VoteClassifier(*bagged_classifiers)
 test_classifier(VoteClassifier(*bagged_classifiers))
 '''
-test_classifier(SMOTEClassifier(SVMClassifier(6, kernel='rbf')))
+# test_classifier(SMOTEClassifier(SVMClassifier(6, kernel='rbf')))

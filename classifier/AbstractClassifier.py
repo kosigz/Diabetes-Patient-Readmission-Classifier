@@ -1,7 +1,7 @@
 from abc import abstractmethod
+from imblearn.combine import SMOTEENN
 
-
-
+sm = SMOTEENN()
 class AbstractClassifier(object):
     """Arbitrary classifier implementation with helper methods"""
     def __init__(self, typ, **params):
@@ -77,4 +77,5 @@ class AbstractClassifier(object):
 
     # calculates the proportion of correctly classified test points (0-1)
     def accuracy(self, test_X, test_Y):
+        test_X, test_Y = sm.fit_sample(test_X, test_Y)
         return self.correct(test_X, test_Y) / float(test_X.shape[0])

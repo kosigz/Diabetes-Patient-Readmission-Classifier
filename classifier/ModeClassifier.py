@@ -24,4 +24,4 @@ class ModeClassifier(AbstractClassifier):
 #            test_classifier(ModeClassifier(k, weights=w, p=p, n_jobs=4))
 # -*- coding: utf-8 -*-
 
-test_classifier(SMOTEClassifier(ModeClassifier()))
+# test_classifier(SMOTEClassifier(ModeClassifier()))

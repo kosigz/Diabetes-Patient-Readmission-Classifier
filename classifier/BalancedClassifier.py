@@ -56,8 +56,8 @@ class SMOTEClassifier(OversampleClassifier):
         self.classifier.train(*sm.fit_sample(X, Y))
 
 '''
-for c in range(1, 10, 1):
-    for kernel in ['rbf', 'poly']:
+for kernel in ['rbf', 'poly']:
+    for c in range(1, 10, 1):
         if kernel == poly:
             test_classifier(SMOTEClassifier(SVMClassifier(C=c, kernel=kernel, degree=3)), folds=10)
         test_classifier(SMOTEClassifier(SVMClassifier(C=c, kernel=kernel, degree=3)), folds=10)
@@ -77,6 +77,14 @@ for k in [1, 2, 4, 8, 16, 25, 32, 64]:
     test_classifier(SMOTEClassifier(KNNClassifier(k)))
 raise Exception('done for now')
 '''
-for t in [4, 8, 16, 25, 32, 50, 64, 75, 100, 128]:
-    test_classifier(RandomForestClassifier(t))
+'''
+for c in range(3, 10, 1):
+    for kernel in ['rbf', 'poly']:
+        if kernel == 'poly':
+            acc = test_classifier(SMOTEClassifier(SVMClassifier(C=c, kernel=kernel, degree=3)), folds=10, num_samples=None)
+        else:
+            acc = test_classifier(SMOTEClassifier(SVMClassifier(C=c, kernel=kernel)), folds=10)
+        outfile.write('C = {}, Kernel = {}\t{}'.format(c, kernel, acc))
 
+test_classifier(SMOTEClassifier(SVMClassifier(C=6, kernel='rbf')), folds=10)
+'''
