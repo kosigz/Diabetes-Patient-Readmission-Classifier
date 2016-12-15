@@ -77,5 +77,4 @@ class AbstractClassifier(object):
 
     # calculates the proportion of correctly classified test points (0-1)
     def accuracy(self, test_X, test_Y):
-        test_X, test_Y = sm.fit_sample(test_X, test_Y)
         return self.correct(test_X, test_Y) / float(test_X.shape[0])
