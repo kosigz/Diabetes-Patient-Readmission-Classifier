@@ -2,7 +2,7 @@ from scipy.stats import mode
 import numpy as np
 from imblearn.combine import SMOTEENN
 
-from . import AbstractClassifier, SVMClassifier, RandomForestClassifier, LogisticRegressionClassifier, KNNClassifier, test_classifier
+from . import AbstractClassifier
 
 
 
@@ -55,6 +55,9 @@ class SMOTEClassifier(OversampleClassifier):
         # train the classifier on SMOTE-balanced samples
         self.classifier.train(*sm.fit_sample(X, Y))
 
+
+
+#from . import SVMClassifier, RandomForestClassifier, LogisticRegressionClassifier, KNNClassifier, test_classifier
 '''
 for c in range(1, 10, 1):
     for kernel in ['rbf', 'poly']:
@@ -77,6 +80,6 @@ for k in [1, 2, 4, 8, 16, 25, 32, 64]:
     test_classifier(SMOTEClassifier(KNNClassifier(k)))
 raise Exception('done for now')
 '''
-for t in [4, 8, 16, 25, 32, 50, 64, 75, 100, 128]:
-    test_classifier(RandomForestClassifier(t))
+#for t in [4, 8, 16, 25, 32, 50, 64, 75, 100, 128]:
+#    test_classifier(RandomForestClassifier(t))
 

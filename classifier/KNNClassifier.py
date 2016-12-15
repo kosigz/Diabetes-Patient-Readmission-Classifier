@@ -1,6 +1,6 @@
 from sklearn.neighbors import KNeighborsClassifier
 
-from . import AbstractZnormClassifier, test_classifier
+from . import AbstractZnormClassifier
 
 
 
@@ -24,7 +24,13 @@ class KNNClassifier(AbstractZnormClassifier):
     def _classify(self, test_X):
         return self._knn.predict(test_X)
 
-#for k in (3, 5, 10, 20):
+
+
+#from . import test_classifier, SMOTEClassifier
+
+#for k in (1, 3, 5, 10):
 #    for w in ("uniform", "distance"):
 #        for p in (1, 2):
-#            test_classifier(KNNClassifier(k, weights=w, p=p, n_jobs=4))
+#            test_classifier(KNNClassifier(k, weights=w, p=p, n_jobs=4), num_samples=5000)
+#for k in (3, 5, 10, 15):
+#    test_classifier(SMOTEClassifier(KNNClassifier(k, n_jobs=4)))

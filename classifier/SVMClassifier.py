@@ -1,6 +1,8 @@
 from sklearn.svm import SVC
 
-from . import AbstractZnormClassifier, test_classifier
+from . import AbstractZnormClassifier
+
+
 
 class SVMClassifier(AbstractZnormClassifier):
     """Classifier which uses one-vs-one support vector machines"""
@@ -22,6 +24,10 @@ class SVMClassifier(AbstractZnormClassifier):
     def _classify(self, test_X):
         return self._svm.predict(test_X)
 
+
+
+#from . import SMOTEClassifier, test_classifier
+
 '''
 for C in (0.01, 0.1, 1, 2, 5, 10, 25):
     for kernel in ("linear", "poly", "rbf", "sigmoid"):
@@ -31,4 +37,5 @@ for C in (0.01, 0.1, 1, 2, 5, 10, 25):
         else:
             test_classifier(SVMClassifier(C, kernel=kernel, verbose=True))
 '''
-#test_classifier(SVMClassifier(1, kernel="rbf"))
+#for C in (1, 3, 5, 6, 9):
+#    test_classifier(SVMClassifier(C, kernel="rbf", class_weight="balanced", probability=True), folds=1, num_samples=2000)

@@ -1,7 +1,7 @@
 from scipy.stats import mode
 import numpy as np
 
-from . import VoteClassifier, SMOTEClassifier, SVMClassifier, test_classifier
+from . import VoteClassifier, SMOTEClassifier
 
 
 
@@ -13,7 +13,9 @@ class BaggingClassifier(VoteClassifier):
         self.type = "Bagged ({} x {})".format(bags, str(self._classifiers[0]))
 
 
-test_classifier(SVMClassifier(5), folds=5)
-test_classifier(
-    BaggingClassifier(3, lambda: SVMClassifier(5), SMOTEClassifier),
-    folds=5)
+
+#from . import SVMClassifier, test_classifier
+#test_classifier(SVMClassifier(5), folds=5)
+#test_classifier(
+#    BaggingClassifier(3, lambda: SVMClassifier(5), SMOTEClassifier),
+#    folds=5)

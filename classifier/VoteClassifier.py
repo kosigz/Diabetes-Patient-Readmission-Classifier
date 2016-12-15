@@ -1,6 +1,6 @@
 from scipy.stats import mode
 
-from . import AbstractClassifier, KNNClassifier, SVMClassifier, RandomForestClassifier, test_classifier
+from . import AbstractClassifier
 
 
 
@@ -21,6 +21,8 @@ class VoteClassifier(AbstractClassifier):
         return mode([c.classify(test_X) for c in self._classifiers]).mode[0]
 
 
+
+#from . import KNNClassifier, SVMClassifier, RandomForestClassifier, test_classifier
 
 #test_classifier(VoteClassifier(
 #    KNNClassifier(3),

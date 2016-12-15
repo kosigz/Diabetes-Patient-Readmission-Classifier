@@ -1,6 +1,6 @@
 from sklearn.ensemble import RandomForestClassifier as RandomForest
 
-from . import AbstractZnormClassifier, test_classifier
+from . import AbstractZnormClassifier
 
 
 
@@ -8,7 +8,7 @@ class RandomForestClassifier(AbstractZnormClassifier):
     """Classifier which uses the random forests"""
     def __init__(self, n=10, **kwargs):
         # keyword arguments are passed on to scikit-learn's KNN implementation
-        # see http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier
+        # see http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
         # relevant kwargs (* indicates default):
         #     n (int): 10* (number of trees in the random forest)
         #     n_jobs (int): 1* or more (cores used to parallelize neighbor search)
@@ -25,5 +25,17 @@ class RandomForestClassifier(AbstractZnormClassifier):
 
 
 
-#for n in (5, 10, 25):
-#    test_classifier(RandomForestClassifier(n))
+#from . import test_classifier, BaggingClassifier, OversampleClassifier
+##
+#for bags in (3, 5, 10):
+#    for n in (5, 10, 25):
+#        test_classifier(
+#            BaggingClassifier(bags, lambda: RandomForestClassifier(n, n_jobs=4)),
+#            unfold=false)
+#test_classifier(
+#    BaggingClassifier(10,
+#        lambda: RandomForestClassifier(128, class_weight="balanced"),
+#        BalancedClassifier=(lambda x: x)),
+#    folds=10,
+#    num_samples=5000,
+#    unfold=False)

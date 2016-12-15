@@ -3,11 +3,13 @@ from test_classifier import test_classifier
 
 from AbstractClassifier import AbstractClassifier
 from AbstractZnormClassifier import AbstractZnormClassifier
-from KNNClassifier import KNNClassifier
-from SVMClassifier import SVMClassifier
-from LogisticRegressionClassifier import LogisticRegressionClassifier
-from RandomForestClassifier import RandomForestClassifier
+
 from VoteClassifier import VoteClassifier
 from BalancedClassifier import OversampleClassifier, SMOTEClassifier
 from BaggingClassifier import BaggingClassifier
 from ModeClassifier import ModeClassifier
+
+from KNNClassifier import KNNClassifier
+from SVMClassifier import SVMClassifier
+from LogisticRegressionClassifier import LogisticRegressionClassifier
+from RandomForestClassifier import RandomForestClassifier

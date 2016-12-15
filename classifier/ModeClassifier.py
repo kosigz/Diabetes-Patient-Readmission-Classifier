@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import mode
 
-from . import AbstractClassifier, SMOTEClassifier, test_classifier
+from . import AbstractClassifier
 
 
 
@@ -18,10 +18,13 @@ class ModeClassifier(AbstractClassifier):
     def _classify(self, test_X):
         return np.full(test_X.shape[0], self._mode)
 
+
+
+#from . import SMOTEClassifier, test_classifier
 #for k in (3, 5, 10, 20):
 #    for w in ("uniform", "distance"):
 #        for p in (1, 2):
 #            test_classifier(ModeClassifier(k, weights=w, p=p, n_jobs=4))
 # -*- coding: utf-8 -*-
 
-test_classifier(SMOTEClassifier(ModeClassifier()))
+#test_classifier(ModeClassifier())
