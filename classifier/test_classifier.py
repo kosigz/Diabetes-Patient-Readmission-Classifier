@@ -32,7 +32,7 @@ def test_classifier_accuracy(classifier, folds=10, num_samples=None, unfold=True
     for i in range(folds):
         # take sample of all data, rather than just first N points
         if num_samples:
-            sample_idxs = np.random.choice(temp_X.shape[0], size=num_samples)
+            sample_idxs = np.random.choice(temp_X.shape[0], size=num_samples, replace=False)
             temp_X, temp_Y = temp_X[sample_idxs], temp_Y[sample_idxs]
 
         train_X, test_X, train_Y, test_Y = train_test_split(temp_X, temp_Y)
