@@ -1,7 +1,6 @@
 from abc import abstractmethod
 from imblearn.combine import SMOTEENN
 
-sm = SMOTEENN()
 class AbstractClassifier(object):
     """Arbitrary classifier implementation with helper methods"""
     def __init__(self, typ, **params):
@@ -23,7 +22,7 @@ class AbstractClassifier(object):
     # perform any necessary normalization, store data, and train the model
     def train(self, X, Y):
         self.X, self.Y, self.trained = X, Y, True
-        print str(self)
+#        print str(self)
         return self._train(X, Y)
 
 
